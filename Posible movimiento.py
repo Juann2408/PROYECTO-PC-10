@@ -52,5 +52,5 @@ Ficha1=0
 Ficha2=0
 
 Ficha1, Ficha2 = movimiento1(Ficha1, Ficha2), movimiento2(Ficha2)
-
+print("H")
 
