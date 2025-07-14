@@ -1,5 +1,31 @@
 import random
 #BIENVENIDOS
+print("Bienvenidos al parqués de Python")
+input("Presione ENTER para continuar")
+RULE= input("Si conoce las reglas, presione A, de lo contraio B para conocerlas")
+if RULE.upper() == "A":
+    print("Perfecto, comencemos a jugar")
+elif RULE.upper() == "B":
+    mensaje = """
+    - Cada jugador tiene  4  fichas, las cuales deben llegar a la meta
+    - Se inicia por defecto en la cárcel, y se debe sacar un 5 para sacar una ficha
+    - Si alguna ficha obtiene un 5, puede empezar a jugar
+    - Si no tiene fichas afuera, no podrá mover ninguna ficha
+    -MAS TEXTO...
+
+    """
+    print(mensaje)
+
+
+
+    print("Para sacar una ficha, debe sacar un 5 en el dado")
+    print("Si saca un número diferente a 5, pero no tiene fichas afuera, no podrá mover ninguna ficha")
+    print("Acá va más texto...")
+    input("Presione ENTER para continuar")
+else:
+    print("No entendí su respuesta, por favor reinicie el programa")
+    exit()
+
 
 Casillas= ["[]"]*68
 Individual1= ["[]"]*7
@@ -59,15 +85,17 @@ def INICIO ():
     banana = True
     while banana == True:
         TURNOS("Ficha 1R")
-        if fichas["Ficha 1R"]["posicion"]==68:
+        if fichas["Ficha 1R"]["posicion"]>=68:
             banana=False
 
-            break
+            exit()
 
         TURNOS("Ficha 2AZ" )
 
-        if fichas["Ficha 2AZ"]["posicion"]==68:
-            break
+        if fichas["Ficha 2AZ"]["posicion"]>=68:
+            banana=False
+
+            exit()
 
 INICIO()
         
