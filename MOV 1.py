@@ -1,4 +1,5 @@
 import random
+
 #BIENVENIDOS
 print("Bienvenidos al parqués de Python")
 input("Presione ENTER para continuar")
@@ -16,11 +17,6 @@ elif RULE.upper() == "B":
     """
     print(mensaje)
 
-
-
-    print("Para sacar una ficha, debe sacar un 5 en el dado")
-    print("Si saca un número diferente a 5, pero no tiene fichas afuera, no podrá mover ninguna ficha")
-    print("Acá va más texto...")
     input("Presione ENTER para continuar")
 else:
     print("No entendí su respuesta, por favor reinicie el programa")
@@ -40,7 +36,7 @@ def actuTab():
     Casillas= ["[]"]*68
     for ficha_nombre, datos in fichas.items():
         poss = datos["posicion"]
-        if 0 <= poss < 68:
+        if 0 <= poss <= 68:
             Casillas[poss]= f"[{ficha_nombre}]"
 
     print(" ".join(Casillas)) 
@@ -48,7 +44,7 @@ def actuTab():
 
 def moverfichas(ficha_nombre, Cant):
     ficha = fichas[ficha_nombre]
-    ficha["posicion"]+= Cant
+    ficha["posicion"]= (ficha["posicion"] + Cant) % len(Casillas)
     actuTab()
 
 def DadosGen(ficha_nombre):
@@ -65,36 +61,41 @@ def SacarFicha(ficha_nombre,dado):
     ficha = fichas[ficha_nombre]
     if ficha["posicion"]==0:
         if dado == 5:
-            ficha["posicion"]= 1
-            print("Ficha 1R ha entrado al juego")
-            actuTab()
+            if ficha_nombre == "Ficha 1R":
+                ficha["posicion"]= 5
+                print("Ficha 1R ha entrado al juego")
+                actuTab()
+            elif ficha_nombre == "Ficha 2AZ":
+                ficha["posicion"]= 1
+                print("Ficha 2AZ ha entrado al juego")
+                actuTab()
         else:
-            print("Eso no parece ser un 5... TURNO DE: FICHA 2AZ  ")
-            
+            print("Eso no parece ser un 5...")
+
     else: 
         print("Esta ficha ya está afuera")
         DadosGen(ficha_nombre)
             
 def TURNOS (ficha_nombre):
+
     dado = random.randint(1,6)
     print(f"{ficha_nombre} sacó {dado}")
     input("ENTER para continuar")
     SacarFicha(ficha_nombre,dado)
 
 def INICIO ():
-    banana = True
-    while banana == True:
+
+    while True:
         TURNOS("Ficha 1R")
-        if fichas["Ficha 1R"]["posicion"]>=68:
-            banana=False
+        if fichas["Ficha 1R"]["posicion"]>=63:
+            
 
             exit()
 
         TURNOS("Ficha 2AZ" )
 
         if fichas["Ficha 2AZ"]["posicion"]>=68:
-            banana=False
-
+            
             exit()
 
 INICIO()
