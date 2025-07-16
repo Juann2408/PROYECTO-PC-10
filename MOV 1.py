@@ -1,34 +1,14 @@
 import random
 
-#BIENVENIDOS
-print("Bienvenidos al parqués de Python")
-input("Presione ENTER para continuar")
-RULE= input("Si conoce las reglas, presione A, de lo contraio B para conocerlas")
-if RULE.upper() == "A":
-    print("Perfecto, comencemos a jugar")
-elif RULE.upper() == "B":
-    mensaje = """
-    - Cada jugador tiene  4  fichas, las cuales deben llegar a la meta
-    - Se inicia por defecto en la cárcel, y se debe sacar un 5 para sacar una ficha
-    - Si alguna ficha obtiene un 5, puede empezar a jugar
-    - Si no tiene fichas afuera, no podrá mover ninguna ficha
-    -MAS TEXTO...
-
-    """
-    print(mensaje)
-
-    input("Presione ENTER para continuar")
-else:
-    print("No entendí su respuesta, por favor reinicie el programa")
-    exit()
+#CÓDIGO DEL JUEGO DE PARQUÉS
 
 
 Casillas= ["[]"]*68
 Individual1= ["[]"]*7
 Individual2= ["[]"]*7
 fichas={
-"Ficha 1R":{"posicion":0, "estado": "activa"},
-"Ficha 2AZ":{"posicion":0, "estado": "activa"},
+"Ficha 1R":{"posicion":0, "estado": "presa en el extranjero"},
+"Ficha 2AZ":{"posicion":0, "estado": "presa en el extranjero"},
 }  
 
 def actuTab():
@@ -59,8 +39,10 @@ def DadosGen(ficha_nombre):
 
 def SacarFicha(ficha_nombre,dado):
     ficha = fichas[ficha_nombre]
-    if ficha["posicion"]==0:
+    if ficha["estado"] != "activa":
+       
         if dado == 5:
+            ficha["estado"] = "activa"
             if ficha_nombre == "Ficha 1R":
                 ficha["posicion"]= 5
                 print("Ficha 1R ha entrado al juego")
@@ -73,7 +55,6 @@ def SacarFicha(ficha_nombre,dado):
             print("Eso no parece ser un 5...")
 
     else: 
-        print("Esta ficha ya está afuera")
         DadosGen(ficha_nombre)
             
 def TURNOS (ficha_nombre):
@@ -97,8 +78,33 @@ def INICIO ():
         if fichas["Ficha 2AZ"]["posicion"]>=68:
             
             exit()
+#BIENVENIDOS
+def WELCOME ():
+    print("Bienvenidos al parqués de Python")
+    input("Presione ENTER para continuar")
+    RULE= input("Si conoce las reglas, presione A, de lo contraio B para conocerlas")
+    if RULE.upper() == "A":
+        print("Perfecto, comencemos a jugar")
+        input("Presione ENTER para continuar")
+        INICIO()
+    elif RULE.upper() == "B":
+        mensaje = """
+        - Cada jugador tiene  4  fichas, las cuales deben llegar a la meta
+        - Se inicia por defecto en la cárcel, y se debe sacar un 5 para sacar una ficha
+        - Si alguna ficha obtiene un 5, puede empezar a jugar
+        - Si no tiene fichas afuera, no podrá mover ninguna ficha
+        -MAS TEXTO...
 
-INICIO()
+        """
+        print(mensaje)
+
+        input("Presione ENTER para continuar")
+        INICIO()
+    else:
+        print("No entendí su respuesta, por favor reinicie el programa")
+        exit()
+WELCOME()
+
         
           
 
