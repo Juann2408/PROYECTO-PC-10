@@ -7,9 +7,19 @@ Casillas= ["[]"]*68
 Individual1= ["[]"]*7
 Individual2= ["[]"]*7
 fichas={
-"Ficha 1R":{"posicion":0, "estado": "presa en el extranjero"},
-"Ficha 2AZ":{"posicion":0, "estado": "presa en el extranjero"},
-}  
+    "Jugador ROJO": {
+        "Ficha 1R":{"posicion":0, "estado": "presa en el extranjero"},
+        "Ficha 2R":{"posicion":0, "estado": "presa en el extranjero"},
+        "Ficha 3R":{"posicion":0, "estado": "presa en el extranjero"},
+        "Ficha 4R":{"posicion":0, "estado": "presa en el extranjero"}
+
+},
+"Jugador AZUL" :{
+    "Ficha 1AZ":{"posicion":0, "estado": "presa en el extranjero"},
+    "Ficha 2AZ":{"posicion":0, "estado": "presa en el extranjero"},
+    "Ficha 3AZ":{"posicion":0, "estado": "presa en el extranjero"},
+    "Ficha 4AZ":{"posicion":0, "estado": "presa en el extranjero"} 
+    }
 
 def actuTab():
     global Casillas
@@ -89,11 +99,17 @@ def WELCOME ():
         INICIO()
     elif RULE.upper() == "B":
         mensaje = """
-        - Cada jugador tiene  4  fichas, las cuales deben llegar a la meta
-        - Se inicia por defecto en la cárcel, y se debe sacar un 5 para sacar una ficha
-        - Si alguna ficha obtiene un 5, puede empezar a jugar
-        - Si no tiene fichas afuera, no podrá mover ninguna ficha
-        -MAS TEXTO...
+        - Cada equipo tiene hasta 4 fichas.
+        - El tablero tiene 68 casillas externas compartidas + 8 casillas de llegada por equipo.
+        - Se usan dos dados estándar (1 al 6).
+        - Cada equipo tiene hasta 4 fichas.
+        - El tablero tiene 68 casillas externas compartidas + 8 casillas de llegada por equipo.
+        - Se usan dos dados estándar (1 al 6).
+        - Se lanzan 2 dados por turno.
+        - Las fichas solo pueden salir si hay un 5 en el dado.
+        - Máximo 2 fichas por casilla
+
+
 
         """
         print(mensaje)
