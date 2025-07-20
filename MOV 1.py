@@ -49,44 +49,48 @@ def moverfichas(ficha_nombre, Cant):
     ficha["posicion"]= (ficha["posicion"] + Cant) % len(Casillas)
     actuTab()
 
-def DadosGen(ficha_nombre):
-    DadoUno = random.randint(1,6)
-    DadoDos= random.randint(1,6)
-    SumaAmbos= DadoUno + DadoDos
-    print(f"Sacó en 1: {DadoUno}, y en 2: {DadoDos} eso suma un total de...: {SumaAmbos}")
-    input("ENTER para acepatar")
+def DadosGen(playerA, sumaAmbos):
 
-    moverfichas(ficha_nombre, SumaAmbos)
+    fichass = fichas[playerA]
+    fichas_activas = [pieza for pieza, datos in fichass.items() if datos["estado"] == "activa"]
 
-
-def SacarFicha(playerA,dado):
-    fichass= fichas[playerA]
-    if dado == 5:
-        for pieza, datos in  fichass.items():
-                if datos["estado"] != "activa":
-                    datos["estado"] = "activa"
-                    datos["posicion"] = 5 if playerA == "Jugador ROJO" else 1
-                    print(f"{pieza} ha entrado al juego")
-                    actuTab()
-                    return
-                
-        print("Todas las fichas ya están activas, no puedes sacar más fichas :)")
+    if not fichas_activas:
+        print("No hay fichas activas para mover.")
+        actuTab()
         return
-    else:
+
+    print(f"Fichas activas disponibles: {', '.join(fichas_activas)}")
+    ficha_elegida = input("Escriba el nombre exacto de la ficha que desea mover: ")
+    moverfichas(ficha_elegida, sumaAmbos)
+
+
+def SacarFicha(playerA, dado):
+    fichass = fichas[playerA]
+
+    if dado == 5:
         for pieza, datos in fichass.items():
-            if datos["estado"] == "activa":
-                print(f"Esta ficha ya está activa: {pieza}")
-                input("Presione ENTER para continuar")
-                DadosGen(pieza) 
+            if datos["estado"] != "activa":
+                datos["estado"] = "activa"
+                datos["posicion"] = 5 if playerA == "Jugador ROJO" else 1
+                print(f"{pieza} ha entrado al juego")
+                actuTab()
                 return
-        print("Eso no parece ser un 5...")
-
+        print("Todas las fichas ya están activas!!! :)")
+        actuTab()
+        return
+    else: 
+        DadosGen(playerA)
 def TURNOS (playerA):
-
-    dado = random.randint(1,6)
-    print(f"{playerA} sacó {dado}")
+    Dado1=  random.randint(1,6)
+    Dado2= random.randint(1,6)
+    print(f"{playerA} sacó {Dado1} y {Dado2}")
     input("ENTER para continuar")
-    SacarFicha(playerA,dado)
+    if Dado1 == 5 or Dado2 == 5:
+     SacarFicha(playerA,5)
+    else:
+        sumaAmbos = Dado1 + Dado2
+        print(f"{playerA} sacó en  Dado 1: {Dado1} y Dado 2: {Dado2}, eso suma un total de...{sumaAmbos}")
+        DadosGen(playerA,sumaAmbos)
 
 def INICIO ():
     
@@ -105,7 +109,7 @@ def INICIO ():
             exit()
 #BIENVENIDOS
 def WELCOME ():
-    print("Bienvenidos al parqués de Python")
+    print("Bienvenidos al parqués en python de Juan Manuel Ayala")
     input("Presione ENTER para continuar")
     RULE= input("Si conoce las reglas, presione A, de lo contraio B para conocerlas: ")
     if RULE.upper() == "A":
