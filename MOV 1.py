@@ -1,39 +1,51 @@
 import random
 
-#CÓDIGO DEL JUEGO DE PARQUÉS
+#CÓDIGO DEL PARQUÉS
 
 
 Casillas= ["[]"]*68
 Individual1= ["[]"]*7
 Individual2= ["[]"]*7
-fichas={
-    "Jugador ROJO": {
+fichas = {
+    "Jugador ROJO":{
         "Ficha 1R":{"posicion":0, "estado": "presa en el extranjero"},
         "Ficha 2R":{"posicion":0, "estado": "presa en el extranjero"},
         "Ficha 3R":{"posicion":0, "estado": "presa en el extranjero"},
         "Ficha 4R":{"posicion":0, "estado": "presa en el extranjero"}
-
-},
-"Jugador AZUL" :{
-    "Ficha 1AZ":{"posicion":0, "estado": "presa en el extranjero"},
-    "Ficha 2AZ":{"posicion":0, "estado": "presa en el extranjero"},
-    "Ficha 3AZ":{"posicion":0, "estado": "presa en el extranjero"},
-    "Ficha 4AZ":{"posicion":0, "estado": "presa en el extranjero"} 
+    },
+    "Jugador AZUL" :{
+        "Ficha 1AZ":{"posicion":0, "estado": "presa en el extranjero"},
+        "Ficha 2AZ":{"posicion":0, "estado": "presa en el extranjero"},
+        "Ficha 3AZ":{"posicion":0, "estado": "presa en el extranjero"},
+        "Ficha 4AZ":{"posicion":0, "estado": "presa en el extranjero"} 
     }
+}
+def extraerFichas (ficha_nombre):
+    for playerA, ficha_individual in fichas.items():
+            for ficha, datos in ficha_individual.items():
+                if ficha == ficha_nombre:   
+                    return datos
+                
+                
+    else: 
+        return None
+
 
 def actuTab():
     global Casillas
     Casillas= ["[]"]*68
-    for ficha_nombre, datos in fichas.items():
-        poss = datos["posicion"]
-        if 0 <= poss <= 68:
-            Casillas[poss]= f"[{ficha_nombre}]"
+    for fichass in fichas.values():
+        for ficha_nombre, datos in fichass.items():
+            poss = datos["posicion"]
+            if 0 <= poss <= len(Casillas):
+             Casillas[poss]= f"[{ficha_nombre}]"
 
     print(" ".join(Casillas)) 
+    input("TABLERO ACTUALIZADO. Presione ENTER para continuar")
 
 
 def moverfichas(ficha_nombre, Cant):
-    ficha = fichas[ficha_nombre]
+    ficha = extraerFichas(ficha_nombre)
     ficha["posicion"]= (ficha["posicion"] + Cant) % len(Casillas)
     actuTab()
 
@@ -47,52 +59,55 @@ def DadosGen(ficha_nombre):
     moverfichas(ficha_nombre, SumaAmbos)
 
 
-def SacarFicha(ficha_nombre,dado):
-    ficha = fichas[ficha_nombre]
-    if ficha["estado"] != "activa":
-       
-        if dado == 5:
-            ficha["estado"] = "activa"
-            if ficha_nombre == "Ficha 1R":
-                ficha["posicion"]= 5
-                print("Ficha 1R ha entrado al juego")
-                actuTab()
-            elif ficha_nombre == "Ficha 2AZ":
-                ficha["posicion"]= 1
-                print("Ficha 2AZ ha entrado al juego")
-                actuTab()
-        else:
-            print("Eso no parece ser un 5...")
+def SacarFicha(playerA,dado):
+    fichass= fichas[playerA]
+    if dado == 5:
+        for pieza, datos in  fichass.items():
+                if datos["estado"] != "activa":
+                    datos["estado"] = "activa"
+                    datos["posicion"] = 5 if playerA == "Jugador ROJO" else 1
+                    print(f"{pieza} ha entrado al juego")
+                    actuTab()
+                    return
+                
+        print("Todas las fichas ya están activas, no puedes sacar más fichas :)")
+        return
+    else:
+        for pieza, datos in fichass.items():
+            if datos["estado"] == "activa":
+                print(f"Esta ficha ya está activa: {pieza}")
+                input("Presione ENTER para continuar")
+                DadosGen(pieza) 
+                return
+        print("Eso no parece ser un 5...")
 
-    else: 
-        DadosGen(ficha_nombre)
-            
-def TURNOS (ficha_nombre):
+def TURNOS (playerA):
 
     dado = random.randint(1,6)
-    print(f"{ficha_nombre} sacó {dado}")
+    print(f"{playerA} sacó {dado}")
     input("ENTER para continuar")
-    SacarFicha(ficha_nombre,dado)
+    SacarFicha(playerA,dado)
 
 def INICIO ():
-
+    
     while True:
-        TURNOS("Ficha 1R")
-        if fichas["Ficha 1R"]["posicion"]>=63:
-            
+        TURNOS("Jugador ROJO")
+        if fichas ["Jugador ROJO"]["Ficha 1R"]["posicion"]>= 63:
+            print("Jugador ROJO ha ganado")
+
 
             exit()
 
-        TURNOS("Ficha 2AZ" )
+        TURNOS("Jugador AZUL")
 
-        if fichas["Ficha 2AZ"]["posicion"]>=68:
-            
+        if fichas["Jugador AZUL"]["Ficha 1AZ"]["posicion"]>=68:
+            print("Jugador AZUL ha ganado")
             exit()
 #BIENVENIDOS
 def WELCOME ():
     print("Bienvenidos al parqués de Python")
     input("Presione ENTER para continuar")
-    RULE= input("Si conoce las reglas, presione A, de lo contraio B para conocerlas")
+    RULE= input("Si conoce las reglas, presione A, de lo contraio B para conocerlas: ")
     if RULE.upper() == "A":
         print("Perfecto, comencemos a jugar")
         input("Presione ENTER para continuar")
@@ -117,7 +132,7 @@ def WELCOME ():
         input("Presione ENTER para continuar")
         INICIO()
     else:
-        print("No entendí su respuesta, por favor reinicie el programa")
+        print("No entendí su respuesta, intentelo de nuevo")
         exit()
 WELCOME()
 
