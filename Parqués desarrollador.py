@@ -88,6 +88,7 @@ def DadosGen(playerA, sumaAmbos, par):
         datos["ContadorPares"] = 0
 
 
+
 def SacarFicha(playerA, dado,par):
     fichass = fichas[playerA]
     if par == True:
@@ -158,8 +159,8 @@ def SacarFicha(playerA, dado,par):
 def TURNOS (playerA):
     repetir= True
     while repetir:
-        Dado1=  random.randint(1,6)
-        Dado2= random.randint(1,6)
+        Dado1=  int(input("Dado1: "))
+        Dado2=  int(input("Dado2: "))
         par= Dado1==Dado2
         print(f"{playerA} sacó {Dado1} y {Dado2}")
         input("ENTER para continuar")
