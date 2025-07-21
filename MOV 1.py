@@ -81,8 +81,8 @@ def SacarFicha(playerA, dado):
         for pieza, datos in fichass.items():
             if datos["estado"] != "activa":
                 datos["estado"] = "activa"
-                datos["posicion"] = 5  if playerA == "Jugador ROJO" else 1
-                datos["Distancia"] = 5 if playerA == "Jugador ROJO" else 1
+                datos["posicion"] = 5  if playerA == "Jugador ROJO" else 21
+                datos["Distancia"] = 5 if playerA == "Jugador ROJO" else 21
                 print(f"{pieza} ha entrado al juego")
                 actuTab()
                 return
