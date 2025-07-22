@@ -81,7 +81,7 @@ def DadosGen(playerA, sumaAmbos, par):
             datos["posicion"] = None
             datos["Distancia"] = 0
             datos["ContadorPares"] = 0
-            print(f"{ficha_elegida} ha ido a la cárcel por sacar tres pares consecutivos 🚨")
+            print(f"{ficha_elegida} ha ido a la cárcel por sacar tres pares consecutivosss")
             actuTab()
             return
     else:
@@ -96,7 +96,6 @@ def SacarFicha(playerA, dado,par):
                 if datos["estado"] != "activa":
                     datos["estado"] = "activa"
                     datos["posicion"] = 5  if playerA == "Jugador ROJO" else 21
-                    datos["Distancia"] = 5 if playerA == "Jugador ROJO" else 21
                     datos["ContadorPares"] += 1
                     if datos["ContadorPares"] == 3:
                         datos["estado"] = "presa en el extranjero"
