@@ -2,7 +2,8 @@
 
 ## Este es parqués del GRUPO 10 (Juan Manuel Ayala Aragón) de programación de computadores de la Universidad Nacional. 
 
-Puedes acceder al video de la descripción del código paso a paso en el siguiente enlace:_ [VIDEO](https://youtu.be/5wr7Innhu74?si=OrouV24SvSqm2q15)
+Puedes acceder al video de la descripción del código paso a paso en el siguiente enlace:_ [EXPLICACIÓN Y PRUEBAS COMPLETAS](https://youtu.be/5wr7Innhu74?si=OrouV24SvSqm2q15)
+y [PRUEBA EXTRA] (https://youtu.be/jsK8LD7C_uI?si=AtHITb2my54hhNo2).
 ## ¿Qué requisitos necesito para usar este programa?
 - Tener un entorno de ejecución de Python: VS Code, Google Colab, Spyder, etc.
 - Si el programa no cuenta con un interprete, intenta descargarlo directamente desde la página oficial de Python.
