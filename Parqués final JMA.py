@@ -20,8 +20,21 @@ fichas = {
         "Ficha 2AZ":{"posicion":None, "estado": "presa en el extranjero", "Distancia": 0,"ContadorPares": 0},
         "Ficha 3AZ":{"posicion":None, "estado": "presa en el extranjero", "Distancia": 0,"ContadorPares": 0},
         "Ficha 4AZ":{"posicion":None, "estado": "presa en el extranjero", "Distancia": 0,"ContadorPares": 0}
+    },
+    "Jugador VERDE" :{
+        "Ficha 1V":{"posicion":None, "estado": "presa en el extranjero", "Distancia": 0,"ContadorPares": 0},
+        "Ficha 2V":{"posicion":None, "estado": "presa en el extranjero", "Distancia": 0,"ContadorPares": 0},
+        "Ficha 3V":{"posicion":None, "estado": "presa en el extranjero", "Distancia": 0,"ContadorPares": 0},
+        "Ficha 4V":{"posicion":None, "estado": "presa en el extranjero", "Distancia": 0,"ContadorPares": 0}
+    },
+    "Jugador AMARILLO" :{
+        "Ficha 1AM":{"posicion":None, "estado": "presa en el extranjero", "Distancia": 0,"ContadorPares": 0},
+        "Ficha 2AM":{"posicion":None, "estado": "presa en el extranjero", "Distancia": 0,"ContadorPares": 0},
+        "Ficha 3AM":{"posicion":None, "estado": "presa en el extranjero", "Distancia": 0,"ContadorPares": 0},
+        "Ficha 4AM":{"posicion":None, "estado": "presa en el extranjero", "Distancia": 0,"ContadorPares": 0}
     }
 }
+
 
 def extraerFichas (ficha_nombre):
     for playerA, ficha_individual in fichas.items():
