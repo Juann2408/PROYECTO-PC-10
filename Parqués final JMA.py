@@ -96,6 +96,7 @@ def SacarFicha(playerA, dado,par):
                 if datos["estado"] != "activa":
                     datos["estado"] = "activa"
                     datos["posicion"] = 5  if playerA == "Jugador ROJO" else 21
+                    datos["Distancia"] = 5 if playerA == "Jugador ROJO" else 21
                     datos["ContadorPares"] += 1
                     if datos["ContadorPares"] == 3:
                         datos["estado"] = "presa en el extranjero"
@@ -141,8 +142,8 @@ def SacarFicha(playerA, dado,par):
             for pieza, datos in fichass.items():
                 if datos["estado"] != "activa":
                     datos["estado"] = "activa"
-                    datos["posicion"] = 5  if playerA == "Jugador ROJO" else 21
-                    datos["Distancia"] = 5 if playerA == "Jugador ROJO" else 21
+                    datos["posicion"] = 5  if playerA == "Jugador ROJO" else 21 if playerA == "Jugador AZUL" else 45 if playerA == "Jugador VERDE" else 55 if playerA == "Jugador AMARILLO" else None
+                    datos["Distancia"] = 1
                     print(f"{pieza} ha entrado al juego")
                     actuTab()
                     return
@@ -184,6 +185,14 @@ def INICIO ():
 
         if fichas["Jugador AZUL"]["Ficha 1AZ"]["Distancia"]>68 and fichas["Jugador AZUL"]["Ficha 2AZ"]["Distancia"]>68 and fichas["Jugador AZUL"]["Ficha 3AZ"]["Distancia"]>68 and fichas["Jugador AZUL"]["Ficha 4AZ"]["Distancia"]>68:
             print("Jugador AZUL ha ganado")
+            exit()
+        TURNOS("Jugador VERDE")
+        if fichas["Jugador VERDE"]["Ficha 1V"]["Distancia"]>68 and fichas["Jugador VERDE"]["Ficha 2V"]["Distancia"]>68 and fichas["Jugador VERDE"]["Ficha 3V"]["Distancia"]>68 and fichas["Jugador VERDE"]["Ficha 4V"]["Distancia"]>68:
+            print("Jugador VERDE ha ganado")
+            exit()
+        TURNOS("Jugador AMARILLO")
+        if fichas["Jugador AMARILLO"]["Ficha 1AM"]["Distancia"]>68 and fichas["Jugador AMARILLO"]["Ficha 2AM"]["Distancia"]>68 and fichas["Jugador AMARILLO"]["Ficha 3AM"]["Distancia"]>68 and fichas["Jugador AMARILLO"]["Ficha 4AM"]["Distancia"]>68:
+            print("Jugador AMARILLO ha ganado")
             exit()
 #BIENVENIDOS
 def WELCOME ():
